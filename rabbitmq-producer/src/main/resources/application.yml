@@ -12,6 +12,15 @@ spring:
     password: backer
     #虚拟host 可以不设置,使用server默认host
     virtual-host: /vhosts_backer
+
+    #开启 confirm 确认机制
+    publisher-confirms: true
+    #开启 return 确认机制
+    publisher-returns: true
+    #true 消费者在设置没有被路由到合适的队列的情况下会被return 监听，俄不会自动删除
+    template:
+      mandatory: true
+
 logging:
   level:
     root: debug

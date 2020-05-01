@@ -1,9 +1,6 @@
 package com.example.demo.mq;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -73,9 +70,18 @@ public class DirectRabbitConfig {
     }
 
 
-
-
-
-
+    @Bean
+    public Queue queueConfirm() {
+        return new Queue("queueConfirm",true);
+    }
+    @Bean
+    TopicExchange ConfirmTopicExchange() {
+        //声明了一个Topic类型的交换机，durable是持久化（重启rabbitmq这个交换机不会被自动删除）
+        return ExchangeBuilder.topicExchange("ConfirmDirectExchange").durable(true).build();
+    }
+    @Bean
+    Binding bindingConfirm() {
+        return BindingBuilder.bind(queueConfirm()).to(ConfirmTopicExchange()).with("ConfirmRouting");
+    }
 
 }

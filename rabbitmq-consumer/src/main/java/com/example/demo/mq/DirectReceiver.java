@@ -19,8 +19,9 @@ import java.util.Map;
 @RabbitListener(bindings = @QueueBinding(
         value = @Queue(value = "TestDirectQueue", durable = "true"),
         exchange = @Exchange(value = "TestDirectExchange", type = ExchangeTypes.DIRECT)))
-public class HelloReceiver {
+public class DirectReceiver {
 
+    //自定义消息体，加上@payload
     @RabbitHandler
     public void receiverMessage(@Payload  String payload,
                                @Headers Map<String, Object> headers,
