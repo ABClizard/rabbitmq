@@ -81,7 +81,7 @@ public class DirectRabbitConfig {
     }
     @Bean
     Binding bindingConfirm() {
-        return BindingBuilder.bind(queueConfirm()).to(ConfirmTopicExchange()).with("ConfirmRouting");
+        return BindingBuilder.bind(queueConfirm()).to(ConfirmTopicExchange()).with("confirm.save");
     }
 
 }

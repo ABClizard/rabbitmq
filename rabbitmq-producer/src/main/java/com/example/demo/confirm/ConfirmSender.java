@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
+
+/**
+ * 保证消息发送可靠性
+ * 1.事务，批量事物，或者单个事物。提交不成功则回滚
+ * 2.消息确认 confirm模式
+ */
 @Slf4j
 @RestController
 public class ConfirmSender {
@@ -51,7 +57,7 @@ public class ConfirmSender {
         Message msg = new Message("nihao".getBytes(),mp);
         //id + 时间戳 全局唯一
         CorrelationData correlationData = new CorrelationData("1234567890"+new Date());
-        rabbitTemplate.convertAndSend("ConfirmDirectExchange", "ConfirmRouting", msg, correlationData);
+        rabbitTemplate.convertAndSend("ConfirmDirectExchange", "confirm.save", msg, correlationData);
 
     }
 }

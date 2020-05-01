@@ -17,7 +17,7 @@ spring:
     publisher-confirms: true
     #开启 return 确认机制
     publisher-returns: true
-    #true 消费者在设置没有被路由到合适的队列的情况下会被return 监听，俄不会自动删除
+    #true 消费者在设置没有被路由到合适的队列的情况下会被return (publisher-returns)监听，俄不会自动删除
     template:
       mandatory: true
 
